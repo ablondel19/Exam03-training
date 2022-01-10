@@ -6,7 +6,7 @@
 /*   By: ablondel <ablondel@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 17:19:03 by ablondel          #+#    #+#             */
-/*   Updated: 2022/01/09 18:38:33 by ablondel         ###   ########.fr       */
+/*   Updated: 2022/01/10 11:17:49 by ablondel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ int		background_error(t_map *map)
 	return (map->w < 1 || map->w > 300 || map->h < 1 || map->h > 300);
 }
 
-int		is_in(float x, float y, t_c *c)
+float		is_in(float x, float y, t_c *c)
 {
 	return (sqrtf((x - c->xpos) * (x - c->xpos) + (y - c->ypos) * (y - c->ypos)) <= c->rad);
 }
 
-int		is_border(float x, float y, t_c *c)
+float		is_border(float x, float y, t_c *c)
 {
-	int dist = sqrtf((x - c->xpos) * (x - c->xpos) + (y - c->ypos) * (y - c->ypos));
+	float dist = sqrtf((x - c->xpos) * (x - c->xpos) + (y - c->ypos) * (y - c->ypos));
 	if (is_in(x, y, c) && c->rad - 1.0 < dist)
 		return (1);
 	return (0);
@@ -123,12 +123,6 @@ int     main(int ac, char **av)
 	new_c = fscanf(f, "%c %f %f %f %c \n", &c.type, &c.xpos, &c.ypos, &c.rad, &c.c);
 	while (new_c == 5)
 	{
-		printf("[%d]\n", new_c);
-		printf("[%c]\n", c.type);
-		printf("[%f]\n", c.xpos);
-		printf("[%f]\n", c.ypos);
-		printf("[%f]\n", c.rad);
-		printf("[%c]\n", c.c);
 		if ((c.type != 'c' && c.type != 'C') || (c.rad <= 0.0))
 			return (ft_putstr("Error: Operation file corrupted\n"));
 		draw_c(&map, &c);

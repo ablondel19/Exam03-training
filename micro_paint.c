@@ -6,7 +6,7 @@
 /*   By: ablondel <ablondel@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:39:32 by ablondel          #+#    #+#             */
-/*   Updated: 2022/01/09 16:58:29 by ablondel         ###   ########.fr       */
+/*   Updated: 2022/01/10 10:58:12 by ablondel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,12 @@ int		background_error(t_map *map)
 
 int		is_in(int x, int y, t_r *rect)
 {
-	return (rect->xtl <= x && 
-	x <= rect->xbr && 
-	rect->ytl <= y && 
-	y <= rect->ybr);
+	return (rect->xtl <= x && x <= rect->xbr && rect->ytl <= y && y <= rect->ybr);
 }
 
 int		is_border(float x, float y, t_r *rect)
 {
-	return (((is_in(x, y, rect)) && 
-	((rect->xtl + rect->w - x < 1.0 || 
-	rect->ytl + rect->h - y < 1.0) || 
-	(x - rect->xtl < 1.0 || 
-	y - rect->ytl < 1.0))));
+	return (((is_in(x, y, rect)) && ((rect->xtl + rect->w - x < 1.0 || rect->ytl + rect->h - y < 1.0) || (x - rect->xtl < 1.0 || y - rect->ytl < 1.0))));
 }
 
 void	draw_rect(t_map *map, t_r *rect)
